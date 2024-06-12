@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>Tekton.Api.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tekton.Api.IService\Tekton.Api.IService.csproj" />
+    <ProjectReference Include="..\Tekton.Api.Service\Tekton.Api.Service.csproj" />
+    <ProjectReference Include="..\Tekton.Api.ViewModel\Tekton.Api.ViewModel.csproj" />
+  </ItemGroup>
+
+</Project>
