@@ -1,6 +1,6 @@
 # TektonApi
 
-TektonApi fue desarrollado basándose en los principios SOLID, si lo consideramos como 1 de muchos apis de una aplicación, entonces la arquitectura utilizada es la de microservicios, además utiliza el principio de separation of concerns, donde el api es separado en n capas y cada una está encargada de una tarea específica, las capas desarrolladas son:
+TektonApi fue desarrollado basándose en los principios SOLID, si lo consideramos como 1 de muchos apis de una aplicación, entonces la arquitectura utilizada es la de microservicios, utiliza el patrón repository para separar la lógica de acceso a datos de la lógica del negocio, además utiliza el principio de "separation of concerns", donde el api es separado en n capas y cada una está encargada de una tarea específica, las capas desarrolladas son:
 
 Capas
 =====
