@@ -13,8 +13,8 @@ Capas
 7.  Services: Esta capa es quien contiene la programación de los métodos disponibles a utilizar en la API.
 8.  IServices: Es la interfase de la capa Service.
 9.  Validator: Esta capa contiene los patrones de validación aplicadas a los request, se utiliza FluentValidation.
-10.  Apo: Es la capa que expone los servicios publicados.
-11.  Test: Esta capa contiene los tests realizados al api, se utiliza Moq.
+10. Ap1: Es la capa que expone los servicios publicados.
+11. Test: Esta capa contiene los tests realizados al api, se utiliza Moq.
 
 Para levantar el proyecto localmente, considere lo siguiente:
 
