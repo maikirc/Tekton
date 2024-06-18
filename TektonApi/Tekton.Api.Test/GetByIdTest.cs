@@ -51,7 +51,8 @@ namespace Tekton.Api.Test
             string url = "https://665f41e71e9017dc16f381c8.mockapi.io/GetDiscount/";
             mockConfiguration.Setup(x => x.GetSection(keyAppSettings).Value).Returns(url);
 
-            var productService = new ProductService(productLogic, mockLogger.Object, mockStatusService.Object, mockConfiguration.Object);
+            var discountService = new DiscountService(mockConfiguration.Object);
+            var productService = new ProductService(productLogic, mockLogger.Object, mockStatusService.Object, discountService);
             var productController = new ProductController(productService);
 
             var mockHttpContext = new Mock<HttpContext>();
@@ -110,7 +111,8 @@ namespace Tekton.Api.Test
             string url = "https://665f41e71e9017dc16f381c8.mockapi.io/GetDiscount/";
             mockConfiguration.Setup(x => x.GetSection(keyAppSettings).Value).Returns(url);
 
-            var productService = new ProductService(productLogic, mockLogger.Object, mockStatusService.Object, mockConfiguration.Object);
+            var discountService = new DiscountService(mockConfiguration.Object);
+            var productService = new ProductService(productLogic, mockLogger.Object, mockStatusService.Object, discountService);
             var productController = new ProductController(productService);
 
             var mockHttpContext = new Mock<HttpContext>();
@@ -169,7 +171,8 @@ namespace Tekton.Api.Test
             string url = "https://665f41e71e9017dc16f381c8.mockapi.io/GetDiscount/";
             mockConfiguration.Setup(x => x.GetSection(keyAppSettings).Value).Returns(url);
 
-            var productService = new ProductService(productLogic, mockLogger.Object, mockStatusService.Object, mockConfiguration.Object);
+            var discountService = new DiscountService(mockConfiguration.Object);
+            var productService = new ProductService(productLogic, mockLogger.Object, mockStatusService.Object, discountService);
             var productController = new ProductController(productService);
 
             var mockHttpContext = new Mock<HttpContext>();
@@ -238,7 +241,8 @@ namespace Tekton.Api.Test
             string url = "https://665f41e71e9017dc16f381c8.mockapi.io/GetDiscount/";
             mockConfiguration.Setup(x => x.GetSection(keyAppSettings).Value).Returns(url);
 
-            var productService = new ProductService(productLogic, mockLogger.Object, mockStatusService.Object, mockConfiguration.Object);
+            var discountService = new DiscountService(mockConfiguration.Object);
+            var productService = new ProductService(productLogic, mockLogger.Object, mockStatusService.Object, discountService);
             var productController = new ProductController(productService);
 
             var mockHttpContext = new Mock<HttpContext>();

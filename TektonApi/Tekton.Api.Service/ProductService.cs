@@ -22,14 +22,14 @@ namespace Tekton.Api.Service
         private readonly ProductLogic _ProductLogic;
         private readonly ILogger<ProductService> _logger;
         private readonly IStatusService _StatusService;
-        private readonly string _urlMockapiService;
+        private readonly IDiscountService _DiscountService;
 
-        public ProductService(ProductLogic productLogic, ILogger<ProductService> logger, IStatusService StatusService, IConfiguration configuration)
+        public ProductService(ProductLogic productLogic, ILogger<ProductService> logger, IStatusService StatusService, /*IConfiguration configuration,*/ IDiscountService DiscountService)
         {
             _ProductLogic = productLogic;
             _logger = logger;
             _StatusService = StatusService;
-            _urlMockapiService = configuration.GetSection("appSettings:UrlMockapiService").Value;
+            _DiscountService = DiscountService;
         }
 
         public async Task<RespuestaViewModel<ProductResponseDTO>> GetById(long productId, string ipAdress, string idLog)
@@ -72,29 +72,9 @@ namespace Tekton.Api.Service
                     List<StatusViewModel> status = _StatusService.GetStatus();
                     productResult.StatusName = status.Find(s => s.StatusId == (productResult.Status ? 1 : 0)).Name;
 
-                    #region MockApi Service 
-                    HttpClient client = new HttpClient();
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage response = client.GetAsync(_urlMockapiService + productResult.ProductId.ToString()).Result;
-                    
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var respuestaServ = await response.Content.ReadAsStringAsync();
-                        var productDiscount = JsonConvert.DeserializeObject<ProductDiscountViewModel>(respuestaServ);
-                        productResult.Discount = productDiscount.Discount;
-                        productResult.FinalPrice = productResult.Price * (100 - productResult.Discount) / 100;
-                    }
-                    else 
-                    {
-                        // Cuando el producto no tiene registrado un descuento se estima que el descuento es 0.
-                        if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-                            productResult.FinalPrice = productResult.Price;
-                        // Cuando el servicio de descuento del producto no esta disponible se estima que el descuento es 0, porque no esta definida esa regla del negocio.
-                        else
-                            productResult.FinalPrice = productResult.Price;
-                    }
-                    #endregion
+                    decimal discount = await _DiscountService.GetDiscount(productId);
+                    productResult.Discount = discount;
+                    productResult.FinalPrice = productResult.Price * (100 - productResult.Discount) / 100;                    
                 }
 
                 respuesta.DataResult = (productResult != null) ? productResult : null;

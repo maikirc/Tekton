@@ -18,6 +18,5 @@ namespace Tekton.Api.Logic
 
         public async Task<bool> Update(ProductRequestUpdateDTO product, string ipAdress)
         => await _productRepository.Update(product, ipAdress);
-
     }
 }
