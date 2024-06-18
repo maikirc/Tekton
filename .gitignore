@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/MS GitHub
+/TektonApiLog
+/TektonApi 2024-06-12
